@@ -1,6 +1,7 @@
 # flaskapp
 new app
 
+LINK: https://mariayasar-twitoff.herokuapp.com/
 
 Create DB: 
 1. set up models.py with a schema of the  tables 
