@@ -2,23 +2,73 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://unpkg.com/picnic">
+
     <title>Tweet app - {{title}}</title>
 </head>
+
 <body>
-    <h1>This is my first app! :) </h1>
-    <p>Content goes here...</p>
 
-    <ul>
-        {% for user in users %}
-        <li>{{ user.name }}</li>
-        {% endfor %}
+    <h1><a href='/'>Twitoff!</a></h1>
+    <p>Select two twitter authors to analyze their tweets, and predict who is more lijkely to have posted a new tweet.
+    </p>
+    {% block content %}
+    <table>
+        <tr>
+            <td  width=60%>
+
+                    <h4>Select tweets to analyze:</h4>
+
+                <form action="/predict" method="POST">
+
+                    <select name="handle1">
+                        {% for user in users %}
+                        <option value="{{ user.name }}"> {{ user.name }} </option>
+                        {% endfor %}
+                    </select><br>
+
+                    <select name="handle2">
+                        {% for user in users %}
+                        <option value="{{ user.name }}"> {{ user.name }} </option>
+                        {% endfor %}
+                    </select><br>
+
+                    <label>Tweet to analyze:</label>
+                    <input type="text" name="new_tweet" placeholder="Text to analyze">
 
 
+                    <input type="submit" value="Compare Users">
+                </form>
+            </td>
+            <td>
+                <h4>Currently in the database:</h4>
+                <ul>
+                    {% for user in users %}
+                    <li><a href="/user/"+{{ user.name }}>{{ user.name }}</a> </li>
+                    {% endfor %}
+                </ul>
 
-    </ul>
+                <form action="/user" method="POST">
+
+                    <label>Twitter handle:</label>
+                    <input type="text" name="name" placeholder='example'>
+                    <button>Add</button>
+                </form>
+
+               
+            </td>
+        </tr>
+
+
+        {% endblock %}
+
+    </table>
+
 </body>
+
 </html>
